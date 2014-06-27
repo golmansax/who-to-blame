@@ -17,7 +17,7 @@ module WhoToBlame
         result = `#{command}`
 
         lines_per_author = {}
-        result.split('\n').each do |line|
+        result.split("\n").each do |line|
           captures = line.match('^\s*(\d*) author (.*)$').captures
           lines_per_author[captures.last] = captures.first
         end
