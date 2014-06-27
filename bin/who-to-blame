@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/who_to_blame'
+
+if ARGV.length < 1
+  puts 'Need to specify a file extension'
+  exit
+end
+
+WhoToBlame::Runner.new.print_stats(ARGV.last)
