@@ -1,5 +1,3 @@
-module WhoToBlame
-end
-
-require_relative 'who_to_blame/runner'
-require_relative 'who_to_blame/stat_builder'
+require 'who_to_blame/engine'
+require 'who_to_blame/runner'
+require 'who_to_blame/stat_builder'

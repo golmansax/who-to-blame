@@ -4,7 +4,7 @@ module WhoToBlame
 
     def print_stats(file_extension)
       builder = WhoToBlame::StatBuilder.new([file_extension])
-      stats = builder.get_stats
+      stats = builder.stats
       stats.each do |file_extension, lines_per_author|
         puts "Stats for #{file_extension} files:"
         lines_per_author.each do |author, num_lines|

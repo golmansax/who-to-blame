@@ -8,7 +8,7 @@ module WhoToBlame
       self.file_extensions = file_extensions
     end
 
-    def get_stats
+    def stats
       file_extensions.reduce({}) do |memo, file_extension|
         command = 'git ls-tree --name-only -z -r HEAD | ' \
           "egrep -z -Z -E '\.#{file_extension}$' | " \

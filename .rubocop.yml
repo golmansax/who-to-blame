@@ -1,3 +1,6 @@
+Documentation:
+  Enabled: false
+
 Style/FileName:
   Exclude:
     - bin/who-to-blame
