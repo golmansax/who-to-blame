@@ -22,10 +22,9 @@ module WhoToBlame
         'grep "^author " | sort | uniq -c'
       result = `#{command}`
 
-      lines_per_author = {}
-      result.split("\n").each do |line|
+      result.split("\n").each_with_object({}) do |line, memo|
         captures = line.match('^\s*(\d*) author (.*)$').captures
-        lines_per_author[captures.last] = captures.first
+        memo[captures.last] = captures.first.to_i
       end
     end
   end

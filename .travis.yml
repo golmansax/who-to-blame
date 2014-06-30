@@ -3,5 +3,5 @@ rvm:
   - 2.0.0
 script:
   - rake
-  - rubocop
+  - rubocop -D
   - travis-lint
