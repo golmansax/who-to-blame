@@ -12,6 +12,7 @@ Spork.prefork do
   ENV['RAILS_ENV'] ||= 'test'
 
   require File.expand_path('../dummy/config/environment.rb',  __FILE__)
+  require 'rspec/rails'
 
   Rails.backtrace_cleaner.remove_silencers!
 
@@ -22,5 +23,9 @@ Spork.prefork do
   if ActiveSupport::TestCase.method_defined?(:fixture_path=)
     fixture_path = File.expand_path('../fixtures', __FILE__)
     ActiveSupport::TestCase.fixture_path = fixture_path
+  end
+
+  RSpec.configure do |config|
+    config.infer_spec_type_from_file_location!
   end
 end
