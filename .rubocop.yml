@@ -1,3 +1,7 @@
+AllCops:
+  Exclude:
+    - '**/schema.rb'
+
 Documentation:
   Enabled: false
 
