@@ -1,5 +1,6 @@
 module WhoToBlame
   class Engine < Rails::Engine
+    require 'react-rails'
     require 'rails-assets-react'
 
     isolate_namespace WhoToBlame
