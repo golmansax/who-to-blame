@@ -12,8 +12,8 @@ Gem::Specification.new do |spec|
   spec.homepage      = ''
   spec.license       = 'MIT'
 
-  spec.files         = Dir['{app,config,lib}/**/*', 'LICENSE', 'README.md']
+  spec.files         = Dir['{app,bin,config,lib}/**/*', 'LICENSE', 'README.md']
   spec.executables   = spec.files.grep(/^bin\//) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(/^(spec)\//)
+  spec.test_files    = Dir['spec/**/*']
   spec.require_paths = ['lib']
 end

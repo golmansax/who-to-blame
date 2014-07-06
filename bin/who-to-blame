@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'rails'
 require_relative '../lib/who_to_blame'
 
 if ARGV.length < 1
