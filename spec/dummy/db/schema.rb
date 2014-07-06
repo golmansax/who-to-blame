@@ -19,17 +19,21 @@ ActiveRecord::Schema.define(version: 20140705200016) do
     t.datetime "updated_at"
   end
 
+  add_index "who_to_blame_authors", ["full_name"], name: "index_who_to_blame_authors_on_full_name", unique: true
+
   create_table "who_to_blame_file_types", force: true do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "who_to_blame_file_types", ["name"], name: "index_who_to_blame_file_types_on_name", unique: true
+
   create_table "who_to_blame_footprints", force: true do |t|
-    t.date     "date"
-    t.integer  "num_lines"
-    t.integer  "author_id"
-    t.integer  "file_type_id"
+    t.date     "date",         null: false
+    t.integer  "num_lines",    null: false
+    t.integer  "author_id",    null: false
+    t.integer  "file_type_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

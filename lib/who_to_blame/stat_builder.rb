@@ -1,23 +1,23 @@
 module WhoToBlame
   class StatBuilder
-    attr_accessor :file_extensions
+    attr_accessor :file_types
 
-    def initialize(file_extensions)
-      self.file_extensions = file_extensions
+    def initialize(file_types)
+      self.file_types = file_types
     end
 
     def stats
-      file_extensions.each_with_object({}) do |file_extension, memo|
-        memo[file_extension] = lines_per_author(file_extension)
+      file_types.each_with_object({}) do |file_type, memo|
+        memo[file_type] = lines_per_author(file_type)
         memo
       end
     end
 
     private
 
-    def lines_per_author(file_extension)
+    def lines_per_author(file_type)
       command = 'git ls-tree --name-only -z -r HEAD | ' \
-        "egrep -z -Z -E '\.#{file_extension}$' | " \
+        "egrep -z -Z -E '\.#{file_type}$' | " \
         'xargs -0 -n1 git blame --line-porcelain | ' \
         'grep "^author " | sort | uniq -c'
       result = `#{command}`

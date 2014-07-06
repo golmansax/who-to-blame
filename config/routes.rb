@@ -1,3 +1,3 @@
 WhoToBlame::Engine.routes.draw do
-  root to: 'stats#index'
+  root to: 'pages#index'
 end

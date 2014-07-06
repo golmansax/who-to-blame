@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'coveralls', require: false
+gem 'database_cleaner'
 gem 'factory_girl_rails'
 gem 'spork'
 gem 'rake'
