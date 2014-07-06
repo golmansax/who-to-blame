@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - '**/schema.rb'
+  RunRailsCops: true
 
 Documentation:
   Enabled: false
@@ -8,3 +9,8 @@ Documentation:
 FileName:
   Exclude:
     - bin/who-to-blame
+
+Output:
+  Exclude:
+    - bin/*
+    - lib/who_to_blame/runner.rb
