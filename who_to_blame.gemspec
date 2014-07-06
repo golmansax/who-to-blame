@@ -16,4 +16,9 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(/^bin\//) { |f| File.basename(f) }
   spec.test_files    = Dir['spec/**/*']
   spec.require_paths = ['lib']
+
+  spec.add_runtime_dependency 'react-rails'
+  spec.add_runtime_dependency 'rails-assets-react'
+
+  spec.add_development_dependency 'sqlite3'
 end

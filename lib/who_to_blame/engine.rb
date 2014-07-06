@@ -1,5 +1,7 @@
 module WhoToBlame
   class Engine < Rails::Engine
+    require 'rails-assets-react'
+
     isolate_namespace WhoToBlame
 
     config.generators do |generator|

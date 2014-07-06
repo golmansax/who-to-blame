@@ -8,3 +8,4 @@ script:
   - bundle exec rake
   - rubocop -D
   - travis-lint
+  - gem build who_to_blame.gemspec
