@@ -1,5 +1,6 @@
 module WhoToBlame
   class Author < ActiveRecord::Base
+    attr_accessible :full_name
     has_many :footprints, dependent: :destroy
     validates :full_name, presence: true, uniqueness: { case_sensitive: false }
 

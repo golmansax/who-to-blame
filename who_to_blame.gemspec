@@ -19,6 +19,8 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'react-rails'
   spec.add_runtime_dependency 'rails-assets-react'
+  spec.add_runtime_dependency 'rails-assets-reqwest'
 
+  spec.add_development_dependency 'protected_attributes'
   spec.add_development_dependency 'sqlite3'
 end

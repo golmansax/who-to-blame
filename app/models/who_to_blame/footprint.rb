@@ -1,5 +1,6 @@
 module WhoToBlame
   class Footprint < ActiveRecord::Base
+    attr_accessible :num_lines, :date, :file_type, :author
     belongs_to :author
     belongs_to :file_type
     validates :author, presence: true

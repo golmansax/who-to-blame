@@ -10,6 +10,7 @@ group :test do
   gem 'coveralls', require: false
   gem 'database_cleaner'
   gem 'factory_girl_rails'
+  gem 'protected_attributes'
   gem 'rake'
   gem 'rspec'
   gem 'rspec-rails'
