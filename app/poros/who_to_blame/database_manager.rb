@@ -9,8 +9,8 @@ module WhoToBlame
 
     def clear!
       Footprint.destroy_all
-      Author.destroy_all
-      FileType.destroy_all
+      Author.includes(:footprints).destroy_all
+      FileType.includes(:footprints).destroy_all
       self
     end
 
