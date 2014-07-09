@@ -1,12 +1,14 @@
 module WhoToBlame
   class DatabaseManager
     def stats
-      FileType.all.each_with_object({}) do |file_type, memo|
+      file_types = FileType.includes(footprints: :author).all
+      file_types.each_with_object({}) do |file_type, memo|
         memo[file_type.name] = lines_per_author(file_type)
       end
     end
 
     def clear!
+      Footprint.destroy_all
       Author.destroy_all
       FileType.destroy_all
       self
@@ -19,8 +21,12 @@ module WhoToBlame
 
         lines_per_author.each do |author_name, num_lines|
           author = Author.find_or_create_by_full_name!(author_name)
-          params = { num_lines: num_lines, date: Date.today }
-          Footprint.create_for_author_and_file_type!(author, file_type, params)
+          Footprint.create!(
+            num_lines: num_lines,
+            date: Date.today,
+            file_type: file_type,
+            author: author,
+          )
         end
       end
       self
