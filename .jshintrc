@@ -1,0 +1,83 @@
+{
+  // Enforcing options: when set to true, produces more errors
+  "bitwise": true,
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "es3": true,
+  "forin": true,
+  "freeze": true,
+  "immed": true,
+  "indent": 2,
+  "latedef": "nofunc",
+  "newcap": true,
+  "noarg": true,
+  "noempty": true,
+  "nonew": true,
+  "plusplus": false,
+  "quotmark": "single",
+  "undef": true, // See below for a list of globals
+  "unused": true,
+  "strict": true,
+  "trailing": true,
+  "maxparams": 3,
+  "maxdepth": 3,
+  "maxstatements": 10,
+  "maxcomplexity": 3,
+  "maxlen": 80,
+
+  // Relaxing options: when set to true, produces fewer errors
+  "asi": false,
+  "boss": false,
+  "debug": false,
+  "eqnull": false,
+  "esnext": false,
+  "evil": false,
+  "expr": false,
+  "funcscope": false,
+  "gcl": false,
+  "globalstrict": false,
+  "iterator": false,
+  "lastsemic": false,
+  "laxbreak": false,
+  "laxcomma": false,
+  "loopfunc": false,
+  "maxerr": 50,
+  "moz": false,
+  "multistr": false,
+  "notypeof": false,
+  "proto": false,
+  "scripturl": false,
+  "smarttabs": false,
+  "shadow": false,
+  "sub": false,
+  "supernew": false,
+  "validthis": false,
+
+  // Environments and exposing globals
+  "browser": false,
+  "couch": false,
+  "devel": false,
+  "dojo": false,
+  "jquery": false,
+  "mootools": false,
+  "node": false,
+  "nonstandard": false,
+  "phantom": false,
+  "prototypejs": false,
+  "rhino": false,
+  "worker": false,
+  "wsh": false,
+  "yui": false,
+
+  "globals": {
+    // Allow window (but not document and location and ...)
+    "window": true,
+
+    // Plugins
+    "_": true,
+    "Chart": true,
+    "React": true,
+    "reqwest": true
+  }
+}

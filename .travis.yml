@@ -4,8 +4,10 @@ rvm:
 before_script:
   - bundle exec rake app:db:migrate
   - bundle exec rake app:db:test:prepare
+  - npm install jshint
 script:
   - bundle exec rake
   - rubocop -D
   - travis-lint
   - gem build who_to_blame.gemspec
+  - jshint app/assets/javascripts/**/*
