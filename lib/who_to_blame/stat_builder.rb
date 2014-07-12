@@ -7,10 +7,10 @@ module WhoToBlame
     end
 
     # Unit of step is in days
-    def stats_over_time(num_steps, step = 1)
-      (0..num_steps * step).step(step).each do |num_days_in_past|
-      end
-    end
+    # def stats_over_time(num_steps, step = 1)
+    #   (0..num_steps * step).step(step).each do |num_days_in_past|
+    #   end
+    # end
 
     def stats
       file_types.each_with_object({}) do |file_type, memo|
