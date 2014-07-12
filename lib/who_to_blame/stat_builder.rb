@@ -6,6 +6,12 @@ module WhoToBlame
       self.file_types = file_types
     end
 
+    # Unit of step is in days
+    def stats_over_time(num_steps, step = 1)
+      (0..num_steps * step).step(step).each do |num_days_in_past|
+      end
+    end
+
     def stats
       file_types.each_with_object({}) do |file_type, memo|
         memo[file_type] = lines_per_author(file_type)
@@ -14,17 +20,8 @@ module WhoToBlame
 
     private
 
-    def stats_from_bash(file_type)
-      command = 'git ls-tree --name-only -z -r HEAD | ' \
-        "egrep -z -Z -E '\.#{file_type}$' | " \
-        'xargs -0 -n1 git blame --line-porcelain | ' \
-        'grep "^author " | sort | uniq -c'
-
-      `#{command}`
-    end
-
     def lines_per_author(file_type)
-      result = stats_from_bash(file_type)
+      result = WhoToBlame::BashInterface.new.stats(file_type)
 
       result.split("\n").each_with_object({}) do |line, memo|
         captures = line.match('^\s*(\d*) author (.*)$').captures
