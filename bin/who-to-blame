@@ -3,9 +3,24 @@
 require 'rails'
 require_relative '../lib/who_to_blame'
 
-if ARGV.length < 1
-  puts 'Need to specify a file extension'
+def usage
+  puts 'Usage: who-to-blame [(optional) date] [file extension]'
   exit
 end
 
-WhoToBlame::Runner.new.print_stats(ARGV.last)
+usage if ARGV.length < 1
+
+def parse_date(date)
+  Date.parse(date)
+rescue ArgumentError
+  nil
+end
+
+date = parse_date(ARGV[0])
+
+if date
+  usage if ARGV.length < 2
+  WhoToBlame::Runner.new.print_stats_at(date, ARGV[1])
+else
+  WhoToBlame::Runner.new.print_stats_at(Date.today, ARGV[0])
+end

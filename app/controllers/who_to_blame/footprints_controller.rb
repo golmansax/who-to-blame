@@ -7,7 +7,7 @@ module WhoToBlame
     end
 
     def create
-      stats = WhoToBlame::StatBuilder.new(['rb']).stats
+      stats = WhoToBlame::StatBuilder.new(['rb']).stats_at(Date.today)
       DatabaseManager.new.clear!.load!(stats)
 
       respond_to do |format|
