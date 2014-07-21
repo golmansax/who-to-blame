@@ -3,8 +3,10 @@ source 'https://rails-assets.org'
 
 gemspec
 
-gem 'rubocop'
-gem 'travis-lint'
+group :development do
+  gem 'rubocop'
+  gem 'travis-lint'
+end
 
 group :test do
   gem 'coveralls', require: false
