@@ -12,7 +12,7 @@ module WhoToBlame
 
       command = "git ls-tree --name-only -z -r #{commit} | " \
         "egrep -z -Z -E '\.#{file_type}$' | " \
-        'xargs -0 -n1 git blame --line-porcelain | ' \
+        "xargs -0 -n1 git blame #{commit} --line-porcelain -- | " \
         'grep "^author " | sort | uniq -c'
 
       `#{command}`

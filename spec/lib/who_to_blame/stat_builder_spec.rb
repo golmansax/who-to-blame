@@ -20,7 +20,7 @@ module WhoToBlame
       end
 
       it 'returns desired data from 07/04' do
-        expected_stats = { 'rb' => { 'Holman Gao' => 492 } }
+        expected_stats = { 'rb' => { 'Holman Gao' => 408 } }
         expect(builder.stats_at(Date.parse('07/04'))).to eq(expected_stats)
       end
 
