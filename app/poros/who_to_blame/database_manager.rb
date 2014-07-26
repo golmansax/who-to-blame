@@ -1,10 +1,7 @@
 module WhoToBlame
   class DatabaseManager
-    def stats_at(*)
-      file_types = FileType.includes(footprints: :author).all
-      file_types.each_with_object({}) do |file_type, memo|
-        memo[file_type.name] = lines_per_author(file_type)
-      end
+    def footprints(date)
+      Footprint.where(date: date)
     end
 
     def clear!

@@ -26,19 +26,28 @@ module WhoToBlame
         end.to raise_error(ActionController::UnknownFormat)
       end
 
-      it 'renders a json of the stats in the db' do
+      it 'renders a json of the footprints of today' do
+        create(:footprint, date: Date.today)
         get(:index, params)
-        rendered_json = JSON.parse(response.body)
-        expect(rendered_json.keys).to eq(['rb'])
-        expect(rendered_json['rb'].keys).to eq(['Scooby Doo'])
+
+        expected_footprint = {
+          author: 'Scooby Doo',
+          file_type: 'rb',
+          num_lines: 20,
+        }.with_indifferent_access
+        expect(JSON.parse(response.body)).to eq([expected_footprint])
       end
 
       it 'gets associated stats with a date when params specified' do
         create(:footprint, num_lines: 42, date: Date.new(2014, 05, 30))
         get(:index, params.merge(year: '2014', day: '30', month: '05'))
 
-        rendered_json = JSON.parse(response.body)
-        expect(rendered_json['rb']['Scooby Doo']).to eq(42)
+        expected_footprint = {
+          author: 'Scooby Doo',
+          file_type: 'rb',
+          num_lines: 42,
+        }.with_indifferent_access
+        expect(JSON.parse(response.body)).to eq([expected_footprint])
       end
     end
 

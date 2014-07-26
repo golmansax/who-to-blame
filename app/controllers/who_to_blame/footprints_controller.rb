@@ -4,7 +4,7 @@ module WhoToBlame
       date = params[:year] ? date_from_params : Date.today
 
       respond_to do |format|
-        format.json { render json: DatabaseManager.new.stats_at(date) }
+        format.json { render json: DatabaseManager.new.footprints(date) }
       end
     end
 
