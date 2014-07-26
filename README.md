@@ -7,6 +7,8 @@ who-to-blame
 TODO
 ----
 
+- Set time zone for `BashInterface#commit_at`
+
 - Need to first create stats over a date range
 URL: footprints, method: PUT, params: start_date, end_date
 
