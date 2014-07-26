@@ -23,14 +23,17 @@ module WhoToBlame
     end
 
     describe '#load!' do
-      let(:stats) do
-        {
-          'rb' => { 'Scooby Doo' => 77, 'Shaggy' => 40 },
-          'cpp' => { 'Scooby Doo' => 15, 'Velma' => 1 },
-        }
+      let(:basic_footprints) do
+        [
+          BasicFootprint.new('Scooby Doo', 'rb', 77),
+          BasicFootprint.new('Shaggy', 'rb', 40),
+          BasicFootprint.new('Scooby Doo', 'cc', 15),
+          BasicFootprint.new('Velma', 'cc', 1),
+        ]
       end
+      let(:date) { Date.new(2014, 05, 30) }
 
-      before(:each) { manager.load!(stats) }
+      before(:each) { manager.load!(date, basic_footprints) }
 
       it 'creates authors' do
         expected_names = ['Scooby Doo', 'Shaggy', 'Velma']
@@ -38,13 +41,15 @@ module WhoToBlame
       end
 
       it 'creates file_types' do
-        expected_names = %w(rb cpp)
+        expected_names = %w(rb cc)
         expect(FileType.all.map(&:name)).to eq(expected_names)
       end
 
       it 'creates footprints' do
         expected_num_lines = [77, 40, 15, 1]
         expect(Footprint.all.map(&:num_lines)).to eq(expected_num_lines)
+
+        Footprint.all.each { |footprint| expect(footprint.date).to eq(date) }
       end
     end
   end

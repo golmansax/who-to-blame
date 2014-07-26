@@ -1,6 +1,6 @@
 module WhoToBlame
   class DatabaseManager
-    def stats
+    def stats_at(*)
       file_types = FileType.includes(footprints: :author).all
       file_types.each_with_object({}) do |file_type, memo|
         memo[file_type.name] = lines_per_author(file_type)
@@ -14,20 +14,24 @@ module WhoToBlame
       self
     end
 
-    # Stats should be a hash from file_type => lines_per_author
-    def load!(stats)
-      stats.each do |file_type_name, lines_per_author|
-        file_type = FileType.find_or_create_by_name!(file_type_name)
+    def load_snapshots!(snapshots)
+      snapshots.each do |snapshot|
+        load!(snapshot.date, snapshot.footprints)
+      end
+      self
+    end
 
-        lines_per_author.each do |author_name, num_lines|
-          author = Author.find_or_create_by_full_name!(author_name)
-          Footprint.create!(
-            num_lines: num_lines,
-            date: Date.today,
-            file_type: file_type,
-            author: author,
-          )
-        end
+    def load!(date, basic_footprints)
+      basic_footprints.each do |basic_footprint|
+        file_type = FileType.find_or_create_by_name!(basic_footprint.file_type)
+        author = Author.find_or_create_by_full_name!(basic_footprint.author)
+
+        Footprint.create!(
+          num_lines: basic_footprint.num_lines,
+          date: date,
+          file_type: file_type,
+          author: author,
+        )
       end
       self
     end

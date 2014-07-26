@@ -7,7 +7,7 @@ module WhoToBlame
       result.present? ? result : nil
     end
 
-    def stats_at(date, file_type)
+    def who_to_blame_for(date, file_type)
       commit = commit_at(date)
 
       command = "git ls-tree --name-only -z -r #{commit} | " \

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140705200016) do
+ActiveRecord::Schema.define(version: 20140721141600) do
 
   create_table "who_to_blame_authors", force: true do |t|
     t.string   "full_name",  null: false
@@ -37,5 +37,7 @@ ActiveRecord::Schema.define(version: 20140705200016) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "who_to_blame_footprints", ["date"], name: "index_who_to_blame_footprints_on_date"
 
 end

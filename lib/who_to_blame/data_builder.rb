@@ -1,5 +1,5 @@
 module WhoToBlame
-  class StatBuilder
+  class DataBuilder
     attr_accessor :file_types
 
     def initialize(file_types)
@@ -7,23 +7,31 @@ module WhoToBlame
     end
 
     # Unit of step is in days
-    def stats_over_time(num_steps, step = 1)
+    def snapshots(end_date, num_steps, step = 1)
+      start_date = end_date - num_steps * step
+
       (0..num_steps * step).step(step).map do |num_days_in_past|
-        date = Date.today - num_days_in_past
-        { date: date.to_s, lines_per_author: stats_at(date) }
+        date = start_date + num_days_in_past
+        WhoToBlame::Snapshot.new(date, footprints(date))
       end
     end
 
-    def stats_at(date)
-      file_types.each_with_object({}) do |file_type, memo|
-        memo[file_type] = lines_per_author(date, file_type)
+    def footprints(date)
+      file_types.reduce([]) do |memo, file_type|
+        memo + extract_footprints(date, file_type)
       end
     end
 
     private
 
+    def extract_footprints(date, file_type)
+      lines_per_author(date, file_type).map do |author, num_lines|
+        WhoToBlame::BasicFootprint.new(author, file_type, num_lines)
+      end
+    end
+
     def lines_per_author(date, file_type)
-      result = WhoToBlame::BashInterface.new.stats_at(date, file_type)
+      result = WhoToBlame::BashInterface.new.who_to_blame_for(date, file_type)
 
       result.split("\n").each_with_object({}) do |line, memo|
         captures = line.match('^\s*(\d*) author (.*)$').captures
