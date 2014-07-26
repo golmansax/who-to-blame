@@ -71,7 +71,7 @@ module WhoToBlame
             year: 2014,
             month: 7,
             day: 6,
-            footprints: [holmans_ruby_footprint(727).as_json],
+            footprints: [holmans_ruby_footprint(567).as_json],
           }.with_indifferent_access,
           {
             year: 2014,

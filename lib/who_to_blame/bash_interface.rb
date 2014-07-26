@@ -1,7 +1,8 @@
 module WhoToBlame
   class BashInterface
     def commit_at(date)
-      command = "git log --before #{date} | head -1 | sed 's/commit //'"
+      date_time = "#{date}T00:00:00-0700"
+      command = "git log --before #{date_time} | head -1 | sed 's/commit //'"
       result = `#{command}`.chomp
 
       result.present? ? result : nil
