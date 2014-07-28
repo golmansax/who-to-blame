@@ -24,6 +24,7 @@
   );
 
   function StatManagerConfig() {
+    /* jshint validthis: true */
     return {
       getInitialState: getInitialState,
       componentDidMount: componentDidMount,
@@ -44,7 +45,6 @@
     }
 
     function handleStatsLoad(stats) {
-      console.log(stats);
       this.setState({ stats: stats });
 
       var colors = [
@@ -91,11 +91,7 @@
   }
 
   function LoadButtonConfig() {
-    var buttonText = {
-      default: 'Load Data',
-      loading: 'Loading...'
-    };
-
+    /* jshint validthis: true */
     return {
       getInitialState: getInitialState,
       loadData: loadData,
@@ -108,7 +104,7 @@
 
     function loadData() {
       if (this.state.loading) {
-        alert('Already loading data');
+        window.alert('Already loading data');
         return;
       }
 
@@ -117,25 +113,27 @@
         this.setState({ loading: true });
 
         var today = new Date();
-        var request_data = {
+        var requestData = {
+          /* jshint camelcase: false */
           year: today.getFullYear(),
           month: today.getMonth() + 1,
           day: today.getDate(),
           num_steps: 3,
           step: 7
+          /* jshint camelcase: true */
         };
 
         reqwest({
           url: 'who-to-blame/footprints',
           method: 'post',
-          data: request_data,
+          data: requestData,
           success: function (data) {
             this.props.onDataLoad(data);
             this.setState({ loading: false });
           }.bind(this),
           error: function () {
             this.setState({ loading: false });
-          }.bind(this),
+          }.bind(this)
         });
       }
     }
