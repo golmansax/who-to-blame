@@ -1,7 +1,7 @@
 module WhoToBlame
   class DatabaseManager
     def footprints(date)
-      Footprint.where(date: date)
+      Footprint.includes([:author, :file_type]).where(date: date)
     end
 
     def clear!
