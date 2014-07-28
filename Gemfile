@@ -19,3 +19,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'spork'
 end
+
+group :development, :test do
+  gem 'teaspoon'
+end

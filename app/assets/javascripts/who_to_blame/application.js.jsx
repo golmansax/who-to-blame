@@ -1,30 +1,33 @@
 /** @jsx React.DOM */
 
-//= require react
+//= require react/react-with-addons
 //= require reqwest
 //= require chartjs
 //= require underscore
 
+var StatManager, LoadButton;
+
 (function () {
   'use strict';
 
-  var StatManager;
   StatManager = React.createClass(new StatManagerConfig());
-
-  var LoadButton;
   LoadButton = React.createClass(new LoadButtonConfig());
 
-  React.renderComponent(
-    (
-      /* jshint ignore: start */
-      <StatManager />
-      /* jshint ignore: end */
-    ),
-    window.document.getElementById('example')
-  );
+  var container = window.document.getElementById('example')
+  if (container) {
+    React.renderComponent(
+      (
+        /* jshint ignore: start */
+        <StatManager />
+        /* jshint ignore: end */
+      ),
+      container
+    );
+  }
 
   function StatManagerConfig() {
     /* jshint validthis: true */
+
     return {
       getInitialState: getInitialState,
       componentDidMount: componentDidMount,
@@ -95,6 +98,7 @@
 
   function LoadButtonConfig() {
     /* jshint validthis: true */
+
     return {
       getInitialState: getInitialState,
       loadData: loadData,
@@ -151,5 +155,4 @@
       );
     }
   }
-
 })();

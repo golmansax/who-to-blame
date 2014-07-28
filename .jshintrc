@@ -78,6 +78,13 @@
     "_": true,
     "Chart": true,
     "React": true,
-    "reqwest": true
+    "reqwest": true,
+
+    // Jasmine
+    "beforeEach": true,
+    "describe": true,
+    "expect": true,
+    "it": true,
+    "jasmine": true
   }
 }

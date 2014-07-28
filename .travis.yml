@@ -10,4 +10,7 @@ script:
   - rubocop -D
   - travis-lint
   - gem build who_to_blame.gemspec
-  - jshint app/assets/javascripts/**/*
+  - jshint app/assets/javascripts/who_to_blame/*
+  - jshint spec/javascripts/who_to_blame/*
+  - jshint spec/javascripts
+  - bundle exec teaspoon
