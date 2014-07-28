@@ -1,4 +1,4 @@
-/* jshint ignore: true */
+/* jshint ignore: start */
 (function() {
 
 var Ap = Array.prototype;

@@ -13,7 +13,7 @@ var StatManager, LoadButton;
   StatManager = React.createClass(new StatManagerConfig());
   LoadButton = React.createClass(new LoadButtonConfig());
 
-  var container = window.document.getElementById('example')
+  var container = window.document.getElementById('example');
   if (container) {
     React.renderComponent(
       (
