@@ -28,24 +28,25 @@
     return {
       getInitialState: getInitialState,
       componentDidMount: componentDidMount,
-      handleStatsLoad: handleStatsLoad,
+      handleFootprintsLoad: handleFootprintsLoad,
       render: render
     };
 
     function getInitialState() {
-      return { stats: {} };
+      return { footprints: [] };
     }
 
     function componentDidMount() {
       reqwest({
         url: 'who-to-blame/footprints',
         method: 'get',
-        success: this.handleStatsLoad
+        success: this.handleFootprintsLoad
       });
     }
 
-    function handleStatsLoad(stats) {
-      this.setState({ stats: stats });
+    function handleFootprintsLoad(footprints) {
+      footprints = _.sortBy(footprints, 'num_lines');
+      this.setState({ footprints: footprints });
 
       var colors = [
         {
@@ -63,13 +64,15 @@
       ];
 
       var colorIndex = 0;
-      var chartData = _.map(stats.rb, function (numLines, author) {
+      var chartData = _.map(footprints, function (footprint) {
         var colorOptions = colors[colorIndex];
         colorIndex = (colorIndex + 1) % colors.length;
 
         return _.extend({
-          value: numLines,
-          label: author
+          /* jshint camelcase: false */
+          value: footprint.num_lines,
+          label: footprint.author
+          /* jshint camelcase: true */
         }, colorOptions);
       });
 
@@ -81,8 +84,8 @@
       return (
         /* jshint ignore: start */
         <div>
-          <LoadButton onDataLoad={this.handleStatsLoad} />
-          <div>{JSON.stringify(this.state.stats)}</div>
+          <LoadButton onDataLoad={this.handleFootprintsLoad} />
+          <div>{JSON.stringify(this.state.footprints)}</div>
           <canvas id="myChart" width="400" height="400"></canvas>
         </div>
         /* jshint ignore: end */
