@@ -5,8 +5,7 @@
 //= require chartjs
 //= require underscore
 
-//= require who_to_blame/stat_manager
-//= require who_to_blame/load_button
+//= require_tree .
 
 (function () {
   'use strict';
