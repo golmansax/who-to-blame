@@ -34,17 +34,16 @@ var StatManager;
       this.setState({ footprints: footprints });
     }
 
-    function snapshot() {
-      return { date: new Date(), footprints: this.state.footprints };
-    }
-
     function render() {
+      var snapshot;
+      snapshot = { date: new Date(), footprints: this.state.footprints };
+
       return (
         /* jshint ignore: start */
         <div>
           <LoadButton onDataLoad={this.handleFootprintsLoad} />
           <div>{JSON.stringify(this.state.footprints)}</div>
-          <SnapshotChart snapshot={snapshot.apply(this)} />
+          <SnapshotChart snapshot={snapshot} />
         </div>
         /* jshint ignore: end */
       );

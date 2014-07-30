@@ -18,7 +18,7 @@ var SnapshotChart;
 
     function getDefaultProps() {
       return {
-        snapshot: { date: new Date(), footprints: [] },
+        snapshot: { date: new Date(), footprints: [] }
       };
     }
 
