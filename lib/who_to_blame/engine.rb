@@ -5,6 +5,7 @@ module WhoToBlame
     require 'rails-assets-chartjs'
     require 'rails-assets-react'
     require 'rails-assets-reqwest'
+    require 'rails-assets-routie'
     require 'rails-assets-underscore'
 
     isolate_namespace WhoToBlame
