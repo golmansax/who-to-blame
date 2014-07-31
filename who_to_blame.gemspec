@@ -17,10 +17,12 @@ Gem::Specification.new do |spec|
   spec.test_files    = Dir['spec/**/*']
   spec.require_paths = ['lib']
 
+  spec.add_runtime_dependency 'gon'
   spec.add_runtime_dependency 'react-rails'
   spec.add_runtime_dependency 'rails-assets-chartjs'
   spec.add_runtime_dependency 'rails-assets-react'
   spec.add_runtime_dependency 'rails-assets-reqwest'
+  spec.add_runtime_dependency 'rails-assets-routie'
   spec.add_runtime_dependency 'rails-assets-underscore'
 
   spec.add_development_dependency 'sqlite3'

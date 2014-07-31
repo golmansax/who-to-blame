@@ -1,10 +1,13 @@
 language: ruby
 rvm:
   - 2.0.0
+before_install:
+  - npm install jshint
+install:
+  - bundle install
 before_script:
   - bundle exec rake app:db:migrate
   - bundle exec rake app:db:test:prepare
-  - npm install jshint
 script:
   - bundle exec rake
   - rubocop -D

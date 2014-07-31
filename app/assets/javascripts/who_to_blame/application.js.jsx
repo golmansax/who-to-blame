@@ -1,9 +1,10 @@
 /** @jsx React.DOM */
 
-//= require react/react-with-addons
-//= require reqwest
 //= require chartjs
 //= require underscore
+//= require react/react-with-addons
+//= require reqwest
+//= require routie
 
 //= require_tree .
 
@@ -15,7 +16,7 @@
     React.renderComponent(
       (
         /* jshint ignore: start */
-        <StatManager />
+        <BaseView />
         /* jshint ignore: end */
       ),
       container

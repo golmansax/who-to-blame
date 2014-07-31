@@ -1,2 +1,12 @@
-<div id="example"></div>
-<%= javascript_include_tag "who_to_blame/application" %>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type"/>
+    <title>Who to Blame?</title>
+  </head>
+  <body>
+    <div id="example"></div>
+    <%= include_gon %>
+    <%= javascript_include_tag "who_to_blame/application" %>
+  </body>
+</html>

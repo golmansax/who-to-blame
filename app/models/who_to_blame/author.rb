@@ -8,5 +8,9 @@ module WhoToBlame
       author = find_by_full_name(full_name)
       author || create!(full_name: full_name)
     end
+
+    def as_json(*)
+      { id: id, full_name: full_name }
+    end
   end
 end

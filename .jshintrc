@@ -79,6 +79,8 @@
     "Chart": true,
     "React": true,
     "reqwest": true,
+    "routie": true,
+    "gon": true,
 
     // Jasmine
     "beforeEach": true,

@@ -1,13 +1,13 @@
 /** @jsx React.DOM */
 
-var StatManager;
+var FootprintsView;
 
 (function () {
   'use strict';
 
-  StatManager = React.createClass(new StatManagerConfig());
+  FootprintsView = React.createClass(new FootprintsViewConfig());
 
-  function StatManagerConfig() {
+  function FootprintsViewConfig() {
     /* jshint validthis: true */
 
     return {
@@ -31,6 +31,7 @@ var StatManager;
 
     function handleFootprintsLoad(footprints) {
       footprints = _.sortBy(footprints, 'num_lines');
+
       this.setState({ footprints: footprints });
     }
 
@@ -41,8 +42,10 @@ var StatManager;
       return (
         /* jshint ignore: start */
         <div>
-          <LoadButton onDataLoad={this.handleFootprintsLoad} />
-          <div>{JSON.stringify(this.state.footprints)}</div>
+          <div>
+            <LoadButton onDataLoad={this.handleFootprintsLoad} />
+            <div>{JSON.stringify(this.state.footprints)}</div>
+          </div>
           <SnapshotChart snapshot={snapshot} />
         </div>
         /* jshint ignore: end */

@@ -1,5 +1,6 @@
 module WhoToBlame
   class Engine < Rails::Engine
+    require 'gon'
     require 'react-rails'
     require 'rails-assets-chartjs'
     require 'rails-assets-react'
