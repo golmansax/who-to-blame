@@ -1,10 +1,14 @@
 module WhoToBlame
   class FootprintsController < WhoToBlame::ApplicationController
     def index
-      date = params[:year] ? date_from_params : Date.today
+      db_manager = DatabaseManager.new
+      date = params[:year] ? date_from_params : db_manager.most_recent_date
+
+      footprints = db_manager.footprints(date)
+      snapshot = WhoToBlame::Snapshot.new(date, footprints)
 
       respond_to do |format|
-        format.json { render json: DatabaseManager.new.footprints(date) }
+        format.json { render json: snapshot }
       end
     end
 
@@ -17,7 +21,7 @@ module WhoToBlame
       DatabaseManager.new.clear!.load_snapshots!(snapshots)
 
       respond_to do |format|
-        format.json { render json: snapshots }
+        format.json { render json: snapshots.last }
       end
     end
 

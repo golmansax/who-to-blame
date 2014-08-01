@@ -4,6 +4,10 @@ module WhoToBlame
       Footprint.includes([:author, :file_type]).where(date: date)
     end
 
+    def most_recent_date
+      Footprint.all.map(&:date).sort.last
+    end
+
     def clear!
       Footprint.destroy_all
       Author.includes(:footprints).destroy_all
