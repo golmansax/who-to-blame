@@ -1,5 +1,5 @@
 module WhoToBlame
-  class FootprintsController < WhoToBlame::ApplicationController
+  class SnapshotsController < WhoToBlame::ApplicationController
     def index
       db_manager = DatabaseManager.new
       date = params[:year] ? date_from_params : db_manager.most_recent_date
