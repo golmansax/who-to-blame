@@ -1,8 +1,8 @@
 module WhoToBlame
   class SnapshotsController < WhoToBlame::ApplicationController
-    def index
+    def show
       db_manager = DatabaseManager.new
-      date = params[:year] ? date_from_params : db_manager.most_recent_date
+      date = asking_for_latest ? db_manager.most_recent_date : date_from_params
 
       footprints = db_manager.footprints(date)
       snapshot = WhoToBlame::Snapshot.new(date, footprints)
@@ -29,6 +29,10 @@ module WhoToBlame
 
     def date_from_params
       Date.new(params[:year].to_i, params[:month].to_i, params[:day].to_i)
+    end
+
+    def asking_for_latest
+      params[:id] == 'latest'
     end
   end
 end

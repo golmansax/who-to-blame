@@ -1,19 +1,19 @@
 /** @jsx React.DOM */
 
-var FootprintsView;
+var SnapshotView;
 
 (function () {
   'use strict';
 
-  FootprintsView = React.createClass(new FootprintsViewConfig());
+  SnapshotView = React.createClass(new SnapshotViewConfig());
 
-  function FootprintsViewConfig() {
+  function SnapshotViewConfig() {
     /* jshint validthis: true */
 
     return {
       getInitialState: getInitialState,
       componentDidMount: componentDidMount,
-      handleFootprintsLoad: handleFootprintsLoad,
+      handleSnapshotLoad: handleSnapshotLoad,
       render: render
     };
 
@@ -23,14 +23,14 @@ var FootprintsView;
 
     function componentDidMount() {
       reqwest({
-        url: 'who-to-blame/footprints',
+        url: 'who-to-blame/snapshots/latest',
         method: 'get',
-        success: this.handleFootprintsLoad
+        success: this.handleSnapshotLoad
       });
     }
 
-    function handleFootprintsLoad(footprints) {
-      footprints = _.sortBy(footprints, 'num_lines');
+    function handleSnapshotLoad(snapshot) {
+      var footprints = _.sortBy(snapshot.footprints, 'num_lines');
 
       this.setState({ footprints: footprints });
     }
@@ -43,7 +43,7 @@ var FootprintsView;
         /* jshint ignore: start */
         <div>
           <div>
-            <LoadButton onDataLoad={this.handleFootprintsLoad} />
+            <LoadButton onDataLoad={this.handleSnapshotLoad} />
             <div>{JSON.stringify(this.state.footprints)}</div>
           </div>
           <SnapshotChart snapshot={snapshot} />

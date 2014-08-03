@@ -8,27 +8,36 @@ module WhoToBlame
     let!(:footprint) { create(:footprint) }
 
     describe 'routing' do
-      it 'creates route for snapshots at a date' do
+      it 'creates route for snapshot at a date' do
         expect(get: '/snapshots/2014/30/05').to route_to(
           controller: 'who_to_blame/snapshots',
-          action: 'index',
+          action: 'show',
           year: '2014',
           day: '30',
           month: '05',
         )
       end
+
+      it 'creates route for latest snapshot' do
+        expect(get: '/snapshots/latest').to route_to(
+          controller: 'who_to_blame/snapshots',
+          action: 'show',
+          id: 'latest',
+        )
+      end
     end
 
-    describe '#index' do
+    describe '#show' do
+      let(:show_params) { params.merge(year: '2014', day: '30', month: '05') }
       it 'raises error if type is not json' do
         expect do
-          get(:index, params.except(:format))
+          get(:show, show_params.except(:format))
         end.to raise_error(ActionController::UnknownFormat)
       end
 
       it 'renders a json of the snapshot of today' do
         create(:footprint, date: Date.today)
-        get(:index, params)
+        get(:show, params.merge(id: 'latest'))
 
         expected_footprint = {
           author: 'Scooby Doo',
@@ -42,7 +51,7 @@ module WhoToBlame
 
       it 'gets associated stats with a date when params specified' do
         create(:footprint, num_lines: 42, date: Date.new(2014, 05, 30))
-        get(:index, params.merge(year: '2014', day: '30', month: '05'))
+        get(:show, show_params)
 
         expected_footprint = {
           author: 'Scooby Doo',

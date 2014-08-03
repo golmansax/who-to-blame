@@ -14,7 +14,7 @@ var BaseView;
       getInitialState: getInitialState,
       componentDidMount: componentDidMount,
       showAuthor: showAuthor,
-      showFootprints: showFootprints,
+      showSnapshot: showSnapshot,
       render: render
     };
 
@@ -34,7 +34,7 @@ var BaseView;
     function componentDidMount() {
       routie({
         'authors/:id': this.showAuthor,
-        '': this.showFootprints,
+        '': this.showSnapshot,
         '*': function () { routie(''); }
       });
     }
@@ -45,11 +45,11 @@ var BaseView;
       window.alert(author.fullName);
     }
 
-    function showFootprints() {
+    function showSnapshot() {
       this.setState({
         activeView: (
           /* jshint ignore: start */
-          <FootprintsView />
+          <SnapshotView />
           /* jshint ignore: end */
         )
       });
@@ -66,7 +66,7 @@ var BaseView;
       return (
         <div>
           <div>{authorsHtml}</div>
-          <FootprintsView />
+          {this.state.activeView}
         </div>
       );
       /* jshint ignore: end */
