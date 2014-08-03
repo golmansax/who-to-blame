@@ -9,13 +9,5 @@ WhoToBlame::Engine.routes.draw do
   }
   match snapshot_date_route
 
-  latest_snapshot_route = {
-    '/snapshots/latest' => 'snapshots#show',
-    via: [:get],
-    as: 'latest_snapshot',
-    id: 'latest',
-  }
-  match latest_snapshot_route
-
   resources :snapshots, only: [:create]
 end

@@ -17,14 +17,6 @@ module WhoToBlame
           month: '05',
         )
       end
-
-      it 'creates route for latest snapshot' do
-        expect(get: '/snapshots/latest').to route_to(
-          controller: 'who_to_blame/snapshots',
-          action: 'show',
-          id: 'latest',
-        )
-      end
     end
 
     describe '#show' do
@@ -33,20 +25,6 @@ module WhoToBlame
         expect do
           get(:show, show_params.except(:format))
         end.to raise_error(ActionController::UnknownFormat)
-      end
-
-      it 'renders a json of the snapshot of today' do
-        create(:footprint, date: Date.today)
-        get(:show, params.merge(id: 'latest'))
-
-        expected_footprint = {
-          author: 'Scooby Doo',
-          file_type: 'rb',
-          num_lines: 20,
-        }.with_indifferent_access
-
-        snapshot = JSON.parse(response.body)
-        expect(snapshot['footprints']).to eq([expected_footprint])
       end
 
       it 'gets associated stats with a date when params specified' do

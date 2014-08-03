@@ -15,6 +15,7 @@ var BaseView;
       componentDidMount: componentDidMount,
       showAuthor: showAuthor,
       showSnapshot: showSnapshot,
+      showLatestSnapshot: showLatestSnapshot,
       render: render
     };
 
@@ -28,13 +29,18 @@ var BaseView;
         };
       });
       gon.authors = 'authors have already been initialized!';
-      return { authors: authors, activeView: null };
+
+      var dates = _.map(gon.dates, function (date) {
+        return new Date(date.year, date.month - 1, date.day);
+      });
+      gon.dates = 'dates have already been initialized!';
+      return { authors: authors, dates: dates, activeView: null };
     }
 
     function componentDidMount() {
       routie({
         'authors/:id': this.showAuthor,
-        '': this.showSnapshot,
+        '': this.showLatestSnapshot,
         '*': function () { routie(''); }
       });
     }
@@ -45,11 +51,15 @@ var BaseView;
       window.alert(author.fullName);
     }
 
-    function showSnapshot() {
+    function showLatestSnapshot() {
+      this.showSnapshot(_.last(this.state.dates));
+    }
+
+    function showSnapshot(date) {
       this.setState({
         activeView: (
           /* jshint ignore: start */
-          <SnapshotView />
+          <SnapshotView date={date} />
           /* jshint ignore: end */
         )
       });
@@ -63,9 +73,16 @@ var BaseView;
         );
       });
 
+      var datesHtml = _.map(this.state.dates, function (date) {
+        return (
+          <option value={date.toISOString()}>{date.toString()}</option>
+        );
+      });
+
       return (
         <div>
           <div>{authorsHtml}</div>
+          <select>{datesHtml}</select>
           {this.state.activeView}
         </div>
       );

@@ -18,12 +18,22 @@ var SnapshotView;
     };
 
     function getInitialState() {
-      return { footprints: [] };
+      return { date: null, footprints: [] };
+    }
+
+    function getInitialProps() {
+      return { date: null };
     }
 
     function componentDidMount() {
+      if (!this.props.date) { return; }
+
+      var year = this.props.date.getFullYear();
+      var month = this.props.date.getMonth() + 1;
+      var day = this.props.date.getDate();
+
       reqwest({
-        url: 'who-to-blame/snapshots/latest',
+        url: 'who-to-blame/snapshots/' + year + '/' + day + '/' + month,
         method: 'get',
         success: this.handleSnapshotLoad
       });
@@ -31,14 +41,10 @@ var SnapshotView;
 
     function handleSnapshotLoad(snapshot) {
       var footprints = _.sortBy(snapshot.footprints, 'num_lines');
-
-      this.setState({ footprints: footprints });
+      this.setState({ date: this.props.date, footprints: footprints });
     }
 
     function render() {
-      var snapshot;
-      snapshot = { date: new Date(), footprints: this.state.footprints };
-
       return (
         /* jshint ignore: start */
         <div>
@@ -46,7 +52,7 @@ var SnapshotView;
             <LoadButton onDataLoad={this.handleSnapshotLoad} />
             <div>{JSON.stringify(this.state.footprints)}</div>
           </div>
-          <SnapshotChart snapshot={snapshot} />
+          <SnapshotChart snapshot={this.state} />
         </div>
         /* jshint ignore: end */
       );
