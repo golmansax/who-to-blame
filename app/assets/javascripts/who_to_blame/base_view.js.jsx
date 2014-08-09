@@ -56,10 +56,12 @@ var BaseView;
     }
 
     function showSnapshot(date) {
+      var myDate;
+      myDate = date;
       this.setState({
         activeView: (
           /* jshint ignore: start */
-          <SnapshotView date={date} />
+          <SnapshotView date={myDate} />
           /* jshint ignore: end */
         )
       });

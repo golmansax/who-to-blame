@@ -12,6 +12,7 @@ var SnapshotView;
 
     return {
       getInitialState: getInitialState,
+      getInitialProps: getInitialProps,
       componentDidMount: componentDidMount,
       handleSnapshotLoad: handleSnapshotLoad,
       render: render
