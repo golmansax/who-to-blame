@@ -3,7 +3,7 @@ module WhoToBlame
     def show
       date = date_from_params
 
-      footprints = db_manager.footprints(date)
+      footprints = DatabaseManager.new.footprints(date)
       snapshot = WhoToBlame::Snapshot.new(date, footprints)
 
       respond_to do |format|
