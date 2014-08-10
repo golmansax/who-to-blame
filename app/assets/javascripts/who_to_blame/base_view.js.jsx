@@ -15,7 +15,7 @@ var BaseView;
       componentDidMount: componentDidMount,
       showAuthor: showAuthor,
       showSnapshot: showSnapshot,
-      showLatestSnapshot: showLatestSnapshot,
+      selectDate: selectDate,
       render: render
     };
 
@@ -34,13 +34,19 @@ var BaseView;
         return new Date(date.year, date.month - 1, date.day);
       });
       gon.dates = 'dates have already been initialized!';
-      return { authors: authors, dates: dates, activeView: null };
+
+      return {
+        authors: authors,
+        selectedDate: _.last(dates),
+        dates: dates,
+        activeView: null
+      };
     }
 
     function componentDidMount() {
       routie({
         'authors/:id': this.showAuthor,
-        '': this.showLatestSnapshot,
+        '': this.showSnapshot,
         '*': function () { routie(''); }
       });
     }
@@ -51,20 +57,22 @@ var BaseView;
       window.alert(author.fullName);
     }
 
-    function showLatestSnapshot() {
-      this.showSnapshot(_.last(this.state.dates));
-    }
-
-    function showSnapshot(date) {
-      var myDate;
-      myDate = date;
+    function showSnapshot() {
+      console.log('showing', this.state.selectedDate);
       this.setState({
         activeView: (
           /* jshint ignore: start */
-          <SnapshotView date={myDate} />
+          <SnapshotView date={this.state.selectedDate} />
           /* jshint ignore: end */
         )
       });
+    }
+
+    function selectDate(event) {
+      var dateInIso = event.target.value;
+      var date = new Date(dateInIso);
+      this.setState({ selectedDate: date });
+      this.showSnapshot();
     }
 
     function render() {
@@ -81,10 +89,12 @@ var BaseView;
         );
       });
 
+      var selectedDate = this.state.selectedDate.toISOString();
+
       return (
         <div>
           <div>{authorsHtml}</div>
-          <select>{datesHtml}</select>
+          <select onChange={this.selectDate} value={selectedDate}>{datesHtml}</select>
           {this.state.activeView}
         </div>
       );
