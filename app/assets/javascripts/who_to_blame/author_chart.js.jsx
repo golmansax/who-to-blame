@@ -18,14 +18,17 @@ var AuthorChart;
 
     function getDefaultProps() {
       return {
-        snapshot: { date: new Date(), footprints: [] },
+        snapshot: { date: new Date(), footprints: [] }
       };
     }
 
 
     function loadChart() {
+      var months =
+        ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+
       var chartData = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        labels: months,
         datasets: [
           {
             label: 'My First dataset',
