@@ -58,7 +58,6 @@ var BaseView;
     }
 
     function showSnapshot() {
-      console.log('showing', this.state.selectedDate);
       this.setState({
         activeView: (
           /* jshint ignore: start */

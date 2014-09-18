@@ -21,9 +21,7 @@ var SnapshotView;
     };
 
     function componentWillReceiveProps(nextProps) {
-      console.log('Receiving props', nextProps.date);
       if (nextProps.date !== this.props.date) {
-        console.log('here', nextProps.date);
         this.setDate(nextProps.date);
       }
     }
