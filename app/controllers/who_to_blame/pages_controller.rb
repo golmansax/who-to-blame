@@ -3,9 +3,7 @@ module WhoToBlame
     def index
       gon.authors = Author.all
 
-      dates = Footprint.all.map do |footprint|
-        footprint.date
-      end.uniq.sort
+      dates = Footprint.all.map(&:date).sort
 
       gon.dates = dates.map do |date|
         { year: date.year, month: date.month, day: date.day }
