@@ -52,5 +52,15 @@ module WhoToBlame
         Footprint.all.each { |footprint| expect(footprint.date).to eq(date) }
       end
     end
+
+    describe '#most_recent_date' do
+      let(:date) { Date.new(2014, 05, 30) }
+
+      it 'grabs most recent date among footprints' do
+        create(:footprint, date: Date.new(2012, 03, 11))
+        create(:footprint, date: date)
+        expect(manager.most_recent_date).to eq(date)
+      end
+    end
   end
 end

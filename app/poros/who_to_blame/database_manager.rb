@@ -36,13 +36,5 @@ module WhoToBlame
       end
       self
     end
-
-    private
-
-    def lines_per_author(file_type)
-      file_type.footprints.each_with_object({}) do |footprint, memo|
-        memo[footprint.author.full_name] = footprint.num_lines
-      end
-    end
   end
 end
