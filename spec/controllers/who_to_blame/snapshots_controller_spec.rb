@@ -46,7 +46,7 @@ module WhoToBlame
         params.merge(
           year: '2014',
           month: '07',
-          day: '08',
+          day: '10',
           num_steps: 2,
           step: 2,
         )
@@ -62,8 +62,8 @@ module WhoToBlame
         expected_snapshot = {
           year: 2014,
           month: 7,
-          day: 8,
-          footprints: [holmans_ruby_footprint(812).as_json],
+          day: 10,
+          footprints: [holmans_ruby_footprint(849).as_json],
         }.with_indifferent_access
 
         post(:create, create_params)
@@ -73,11 +73,11 @@ module WhoToBlame
         expect(Author.find_by_full_name('Holman Gao')).not_to be_nil
         expect(FileType.all.map(&:name)).to eq(['rb'])
 
-        start_date = Date.new(2014, 7, 4)
+        start_date = Date.new(2014, 7, 6)
         expected_dates = [start_date, start_date + 2, start_date + 4]
         expect(Footprint.all.map(&:date)).to eq(expected_dates)
 
-        expected_lines = [408, 567, 812]
+        expected_lines = [567, 812, 849]
         expect(Footprint.all.map(&:num_lines)).to eq(expected_lines)
       end
     end
