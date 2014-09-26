@@ -5,9 +5,9 @@ module WhoToBlame
     let(:builder) { DataBuilder.new(['rb']) }
 
     describe '#footprints' do
-      it 'returns desired data from 07/04' do
-        footprints = builder.footprints(Date.parse('07/04'))
-        expect(footprints).to eq([BasicFootprint.new('Holman Gao', 'rb', 408)])
+      it 'returns desired data from 07/06' do
+        footprints = builder.footprints(Date.parse('07/06'))
+        expect(footprints).to eq([BasicFootprint.new('Holman Gao', 'rb', 567)])
       end
 
       it 'breaks up multiple authors' do
